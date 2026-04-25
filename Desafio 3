@@ -1,0 +1,46 @@
+using System;
+using System.Collections.Generic;
+
+class Program
+{
+    static void Main()
+    {
+        var tareas = new List<string>();
+        int op = -1;
+
+        do
+        {
+            Console.WriteLine("\n1. Mostrar\n2. Agregar\n3. Eliminar\n0. Salir");
+            Console.Write("Opción: ");
+            int.TryParse(Console.ReadLine(), out op);
+
+            switch (op)
+            {
+                case 1:
+                    if (tareas.Count == 0)
+                        Console.WriteLine("No hay tareas");
+                    else
+                        foreach (var t in tareas)
+                            Console.WriteLine("- " + t);
+                    break;
+
+                case 2:
+                    Console.Write("Nueva tarea: ");
+                    string tarea = Console.ReadLine();
+                    if (!string.IsNullOrWhiteSpace(tarea))
+                        tareas.Add(tarea);
+                    break;
+
+                case 3:
+                    Console.Write("Tarea a eliminar: ");
+                    string elim = Console.ReadLine();
+                    if (tareas.Remove(elim))
+                        Console.WriteLine("Eliminada");
+                    else
+                        Console.WriteLine("No encontrada");
+                    break;
+            }
+
+        } while (op != 0);
+    }
+}
